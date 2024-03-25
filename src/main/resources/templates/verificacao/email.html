@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verificação</title>
+  <link rel="stylesheet" href="verificacaoCSS.css">
+  <script src="script.js"></script>
+  <link rel="icon" href="../icons/alien.png" type="image/png">
+</head>
+
+<body>
+  <br>
+  <br>
+  <div class="cont">
+    <div class="center">
+      <h2>Esse é seu email?</h2>
+      <h3>b*********@gmail.com</h3>
+      <label>
+        <span>Digite o codigo:</span>
+        <input type="email" />
+      </label>
+      <button type="button" class="submit" id="verificar">verificar</button>
+      <div class="Error" id="codigoError" style="display: none;">Codigo incorreto</div>
+
+      <script>
+        var botao = document.getElementById("verificar");
+            var texto = document.getElementById("codigoError");
+            
+            //     <---- codigo incorreta ---->
+            // adicionar verificação de codigo
+            
+            botao.addEventListener("click", function() {
+                if (texto.style.display === "none") {
+                    texto.style.display = "block";
+                }
+            });
+        </script>
+    </div>
+  </div>
+</body>
+
+</html>
