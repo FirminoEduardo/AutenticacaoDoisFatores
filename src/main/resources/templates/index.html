@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
     <link rel="icon" href="icons/alien.png" type="image/png">
 </head>
 
@@ -29,6 +28,7 @@
             <div class="Error" id="errorSenha" style="display: none;">Senha incorreta.</div>
 
             <script>
+                /*
                 var botao = document.getElementById("verificar");
                 var texto = document.getElementById("errorSenha");
 
@@ -39,7 +39,7 @@
                     if (texto.style.display === "none") {
                         texto.style.display = "block";
                     }
-                });
+                });*/
             </script>
         </div>
 
@@ -47,11 +47,11 @@
             <div class="img">
                 <div class="img__text m--up">
 
-                    <h3>Não tem uma conta? inscreva se!<h3>
+                    <h3>Não tem uma conta? inscreva se!</h3>
                 </div>
                 <div class="img__text m--in">
 
-                    <h3>Se você já tem uma conta, faça login.<h3>
+                    <h3>Se você já tem uma conta, faça login.</h3>
                 </div>
                 <div class="img__btn">
                     <span class="m--up">Criar conta</span>
@@ -61,16 +61,16 @@
             <div class="form sign-up">
                 <h2>Crie sua conta!</h2>
                 <label>
-                    <span id="nome_criarconta">Nome</span>
-                    <input type="text" />
+                    <span >Nome</span>
+                    <input type="text" id="nome_criarconta"/>
                 </label>
                 <label>
-                    <span id="email_criarconta">Email</span>
-                    <input type="email" />
+                    <span >Email</span>
+                    <input type="email" id="email_criarconta"/>
                 </label>
                 <label>
-                    <span id="senha_criarconta">Senha</span>
-                    <input type="password" />
+                    <span >Senha</span>
+                    <input type="password" id="senha_criarconta"/>
                 </label>
                 <button type="button" class="submit" id="criarContar" onclick="criarConta()">Criar conta</button>
                 <div class="criar" id="contaCriada" style="display: none;">Conta criada</div>
@@ -93,6 +93,7 @@
     </div>
 
     <script>
+
         document.querySelector('.img__btn').addEventListener('click', function () {
             document.querySelector('.cont').classList.toggle('s--signup');
         });
@@ -100,17 +101,21 @@
 
     <script>
         function criarConta() {
-            const nome = document.getElementById("nome_criarconta");
-            const email = document.getElementById("email_criarconta");
-            const senha = document.getElementById("senha_criarconta");
+            const name = document.getElementById("nome_criarconta").value;
+            const email = document.getElementById("email_criarconta").value;
+            const password = document.getElementById("senha_criarconta").value;
+
+            console.log(name)
+            console.log(email)
+            console.log(password)
 
             const data = {
-                nome: nome,
+                name: name,
                 email: email,
-                senha: senha
+                password: password
             };
 
-            fetch('http://localhost:9013', {
+            fetch('/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -130,6 +135,7 @@
 
         }
     </script>
+
 </body>
 
 </html>
