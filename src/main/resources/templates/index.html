@@ -61,18 +61,18 @@
             <div class="form sign-up">
                 <h2>Crie sua conta!</h2>
                 <label>
-                    <span>Nome</span>
+                    <span id="nome_criarconta">Nome</span>
                     <input type="text" />
                 </label>
                 <label>
-                    <span>Email</span>
+                    <span id="email_criarconta">Email</span>
                     <input type="email" />
                 </label>
                 <label>
-                    <span>Senha</span>
+                    <span id="senha_criarconta">Senha</span>
                     <input type="password" />
                 </label>
-                <button type="button" class="submit" id="criarContar">Criar conta</button>
+                <button type="button" class="submit" id="criarContar" onclick="criarConta()">Criar conta</button>
                 <div class="criar" id="contaCriada" style="display: none;">Conta criada</div>
 
                 <script>
@@ -96,6 +96,39 @@
         document.querySelector('.img__btn').addEventListener('click', function () {
             document.querySelector('.cont').classList.toggle('s--signup');
         });
+    </script>
+
+    <script>
+        function criarConta() {
+            const nome = document.getElementById("nome_criarconta");
+            const email = document.getElementById("email_criarconta");
+            const senha = document.getElementById("senha_criarconta");
+
+            const data = {
+                nome: nome,
+                email: email,
+                senha: senha
+            };
+
+            fetch('http://localhost:9013', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(response =>{
+                if(!response.ok) {
+                    throw new Error('Erro ao criar conta');
+                }
+                return response.json();
+            }).then(data => {
+                alert('Conta criada com sucesso.');
+            }).catch((error) => {
+                console.log('Erro: ', error);
+                alert('Erro ao criar conta');
+            })
+
+        }
     </script>
 </body>
 

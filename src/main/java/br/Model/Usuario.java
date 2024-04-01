@@ -1,11 +1,18 @@
 package br.Model;
 
-public class Usuario {
-    private Long id;
-    private String username;
-    private String password;
-    private String email;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
+public class Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nome;
+    private String email;
+    private String senha;
 
     public Long getId() {
         return id;
@@ -15,20 +22,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getNome() {
+        return nome;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -39,5 +38,11 @@ public class Usuario {
         this.email = email;
     }
 
-    Exception UsuarioInvalidoException = new Exception();
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 }
