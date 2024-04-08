@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:script="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
@@ -23,7 +23,7 @@
                 <span>senha</span>
                 <input type="password" id="password_login"/>
             </label>
-            <p class="forgot-pass">Esqueceu a senha?</p>
+            <p class="forgot-pass" id="esqueceuSenha">Esqueceu a senha?</p>
             <button type="button" class="submit" id="verificar">verificar</button>
             <div class="Error" id="errorSenha" style="display: none;">Senha incorreta.</div>
 
@@ -163,6 +163,43 @@
                     // Lidar com o erro de login aqui
                     alert('Usuário ou senha incorreto!');
                 });
+        });
+    </script>
+    <script>
+        function enviarTokenRecuperacaoSenha() {
+            const email = document.getElementById('emailRecuperacaoSenha').value;
+
+            const data = {
+                email: email
+            };
+
+            fetch('/forgot-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao enviar o token de recuperação de senha');
+                    }
+                    alert('Token enviado com sucesso. Verifique seu e-mail.');
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Erro ao enviar o token de recuperação de senha');
+                });
+        }
+    </script>
+    <script>
+        document.getElementById('esqueceuSenha').addEventListener('click', function () {
+            const email = prompt('Por favor, digite seu e-mail:');
+            if (email !== null && email !== '') {
+                enviarTokenRecuperacaoSenha(email);
+            } else {
+                alert('Por favor, digite um e-mail válido.');
+            }
         });
     </script>
 </body>

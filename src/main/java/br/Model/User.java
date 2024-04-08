@@ -16,6 +16,16 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    private String resetToken;
+
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
+    }
+
     public Long getId() {
         return id;
     }
