@@ -5,6 +5,7 @@ import br.RegistrationForm.RegistrationForm;
 import br.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -30,5 +31,23 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(registrationForm.getPassword());
         user.setPassword(encodedPassword);
         userRepository.save(user);
+    }
+
+    public boolean login(String email, String password) {
+        // Buscar o usuário no banco de dados pelo email
+        User user = userRepository.findByEmail(email);
+
+        // Verificar se o usuário existe e se a senha está correta
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+            // Login bem-sucedido
+            return true;
+        } else {
+            // Login falhou
+            return false;
+        }
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }

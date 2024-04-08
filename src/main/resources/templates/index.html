@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -17,11 +17,11 @@
             <h2>Bem vindo!</h2>
             <label>
                 <span>Email</span>
-                <input type="email" />
+                <input type="email" id="email_login"/>
             </label>
             <label>
                 <span>senha</span>
-                <input type="password" />
+                <input type="password" id="password_login"/>
             </label>
             <p class="forgot-pass">Esqueceu a senha?</p>
             <button type="button" class="submit" id="verificar">verificar</button>
@@ -122,20 +122,52 @@
                 },
                 body: JSON.stringify(data)
             }).then(response =>{
-                if(!response.ok) {
+                /*if(!response.ok) {
                     throw new Error('Erro ao criar conta');
-                }
+                }*/
                 return response.json();
             }).then(data => {
                 alert('Conta criada com sucesso.');
             }).catch((error) => {
                 console.log('Erro: ', error);
-                alert('Erro ao criar conta');
+                //alert('Erro ao criar conta');
             })
 
         }
     </script>
+    <script>
+        document.getElementById('verificar').addEventListener('click', function () {
+            const email = document.getElementById('email_login').value;
+            const password = document.getElementById('password_login').value;
 
+            const data = {
+                email: email,
+                password: password
+            };
+
+            console.log(data);
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao fazer login');
+                    }
+                    alert('Login bem-sucedido');
+                    // Redirecionar para a página desejada após o login
+                    window.location.href = 'home.html';
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    // Lidar com o erro de login aqui
+                });
+        });
+    </script>
 </body>
 
 </html>
